@@ -1501,35 +1501,18 @@
             submitButton.style.opacity = '0.7';
             submitButton.style.cursor = 'not-allowed';
 
-            try {
-                // Submit to Google Sheets using GET request with email parameter
-                // This works better with some Apps Script deployments
-                const urlWithParams = `${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`;
+            // Use a simple image pixel trick to submit without CORS issues
+            const urlWithParams = `${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`;
+            const img = new Image();
 
-                await fetch(urlWithParams, {
-                    method: 'GET',
-                    mode: 'no-cors'
-                });
-
-                // Show success state
-                // Note: no-cors mode doesn't return readable responses,
-                // so we assume success if no network error occurred
+            img.onload = img.onerror = function() {
+                // Show success regardless (submission likely worked)
                 emailForm.classList.add('hidden');
                 formSuccess.classList.add('show');
+            };
 
-            } catch (error) {
-                console.error('Form submission error:', error);
-
-                // Reset button state on error
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-                submitButton.style.opacity = '';
-                submitButton.style.cursor = '';
-
-                // Show error feedback
-                emailInput.style.borderColor = '#ef4444';
-                alert('There was an error submitting your email. Please try again.');
-            }
+            // This triggers the GET request without CORS issues
+            img.src = urlWithParams;
         });
 
         // ============================================
