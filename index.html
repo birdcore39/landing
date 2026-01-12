@@ -1502,12 +1502,13 @@
             submitButton.style.cursor = 'not-allowed';
 
             try {
-                // Submit to Google Sheets
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
+                // Submit to Google Sheets using GET request with email parameter
+                // This works better with some Apps Script deployments
+                const urlWithParams = `${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`;
+
+                await fetch(urlWithParams, {
+                    method: 'GET',
+                    mode: 'no-cors'
                 });
 
                 // Show success state
