@@ -1253,7 +1253,7 @@
             <div class="email-card">
                 <h2>Get in early.</h2>
                 <p>We're selecting launch partners now. Drop your email for priority access.</p>
-                <form class="email-form" id="emailForm" action="https://formspree.io/f/placeholder" method="POST">
+                <form class="email-form" id="emailForm">
                     <input
                         type="email"
                         name="email"
@@ -1468,38 +1468,67 @@
         // ============================================
         const emailForm = document.getElementById('emailForm');
         const formSuccess = document.getElementById('formSuccess');
+        const emailInput = emailForm.querySelector('input[type="email"]');
+        const submitButton = emailForm.querySelector('button[type="submit"]');
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-S59C3xfxZHCKT105Je3b3WGNJMeItCQwTmkXYT2rvT6fgVpnay05Yt3F-2wa07Pg5g/exec';
+
+        // Email validation function
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
         emailForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const formData = new FormData(emailForm);
-            const email = formData.get('email');
+            const email = emailInput.value.trim();
 
-            // For demo purposes, show success immediately
-            // In production, uncomment the fetch call below
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+                emailInput.style.borderColor = '#ef4444';
+                emailInput.focus();
+                setTimeout(() => {
+                    emailInput.style.borderColor = '';
+                }, 2000);
+                return;
+            }
 
-            /*
+            // Show loading state
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span>Submitting...</span>';
+            submitButton.style.opacity = '0.7';
+            submitButton.style.cursor = 'not-allowed';
+
             try {
-                const response = await fetch(emailForm.action, {
+                // Submit to Google Sheets
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
                 });
 
-                if (response.ok) {
-                    emailForm.classList.add('hidden');
-                    formSuccess.classList.add('show');
-                }
+                // Show success state
+                // Note: no-cors mode doesn't return readable responses,
+                // so we assume success if no network error occurred
+                emailForm.classList.add('hidden');
+                formSuccess.classList.add('show');
+
             } catch (error) {
                 console.error('Form submission error:', error);
-            }
-            */
 
-            // Demo success state
-            emailForm.classList.add('hidden');
-            formSuccess.classList.add('show');
+                // Reset button state on error
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+                submitButton.style.opacity = '';
+                submitButton.style.cursor = '';
+
+                // Show error feedback
+                emailInput.style.borderColor = '#ef4444';
+                alert('There was an error submitting your email. Please try again.');
+            }
         });
 
         // ============================================
