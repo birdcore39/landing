@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="birdGradient" x1="85" y1="128" x2="427" y2="384" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3182ce"/>
+      <stop offset="1" stop-color="#d4a853"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main bird body curve -->
+  <path
+    d="M85 299C85 299 149 256 213 256C277 256 299 213 299 213L427 128"
+    stroke="url(#birdGradient)"
+    stroke-width="21"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird wing/body curve -->
+  <path
+    d="M299 213C299 213 341 256 341 299C341 341 299 384 256 384C213 384 171 341 171 299"
+    stroke="url(#birdGradient)"
+    stroke-width="21"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird head accent -->
+  <circle
+    cx="384"
+    cy="171"
+    r="32"
+    fill="url(#birdGradient)"
+    opacity="0.8"
+  />
+
+  <!-- Bird tail -->
+  <path
+    d="M213 299L128 341"
+    stroke="url(#birdGradient)"
+    stroke-width="21"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird eye -->
+  <circle
+    cx="256"
+    cy="277"
+    r="21"
+    fill="#d4a853"
+  />
+</svg>

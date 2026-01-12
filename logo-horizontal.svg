@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="birdGradient" x1="10" y1="15" x2="90" y2="85" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3182ce"/>
+      <stop offset="1" stop-color="#d4a853"/>
+    </linearGradient>
+    <linearGradient id="textGradient" x1="110" y1="30" x2="390" y2="70" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.85)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main bird body curve -->
+  <path
+    d="M17 58C17 58 30 50 43 50C56 50 60 42 60 42L85 25"
+    stroke="url(#birdGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird wing/body curve -->
+  <path
+    d="M60 42C60 42 68 50 68 58C68 66 60 75 50 75C40 75 32 66 32 58"
+    stroke="url(#birdGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird head accent -->
+  <circle
+    cx="75"
+    cy="33"
+    r="6"
+    fill="url(#birdGradient)"
+    opacity="0.8"
+  />
+
+  <!-- Bird tail -->
+  <path
+    d="M43 58L25 67"
+    stroke="url(#birdGradient)"
+    stroke-width="4"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Bird eye -->
+  <circle
+    cx="50"
+    cy="54"
+    r="4"
+    fill="#d4a853"
+  />
+
+  <!-- BirdBox Text -->
+  <text
+    x="110"
+    y="62"
+    font-family="'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+    font-weight="700"
+    font-size="42"
+    letter-spacing="-0.02em"
+    fill="url(#textGradient)"
+  >BirdBox</text>
+</svg>
