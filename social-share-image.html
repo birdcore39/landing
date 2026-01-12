@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <title>BirdBox Social Share Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .social-card {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0a0f1a 0%, #1a1f2e 50%, #0a0f1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .bg-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(49, 130, 206, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .logo-text {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.85) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 56px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px;
+            letter-spacing: 0.02em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 12px 32px;
+            background: rgba(212, 168, 83, 0.15);
+            border: 2px solid rgba(212, 168, 83, 0.3);
+            border-radius: 50px;
+            color: #d4a853;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Decorative corner elements */
+        .corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-color: rgba(212, 168, 83, 0.3);
+            border-style: solid;
+        }
+
+        .corner-tl {
+            top: 30px;
+            left: 30px;
+            border-width: 3px 0 0 3px;
+            border-radius: 8px 0 0 0;
+        }
+
+        .corner-tr {
+            top: 30px;
+            right: 30px;
+            border-width: 3px 3px 0 0;
+            border-radius: 0 8px 0 0;
+        }
+
+        .corner-bl {
+            bottom: 30px;
+            left: 30px;
+            border-width: 0 0 3px 3px;
+            border-radius: 0 0 0 8px;
+        }
+
+        .corner-br {
+            bottom: 30px;
+            right: 30px;
+            border-width: 0 3px 3px 0;
+            border-radius: 0 0 8px 0;
+        }
+
+        /* Particle effect */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(49, 130, 206, 0.6);
+            border-radius: 50%;
+        }
+
+        .particle:nth-child(1) { top: 15%; left: 20%; }
+        .particle:nth-child(2) { top: 35%; left: 80%; width: 6px; height: 6px; }
+        .particle:nth-child(3) { top: 60%; left: 15%; background: rgba(212, 168, 83, 0.6); }
+        .particle:nth-child(4) { top: 75%; left: 85%; width: 5px; height: 5px; }
+        .particle:nth-child(5) { top: 25%; left: 90%; background: rgba(212, 168, 83, 0.6); }
+        .particle:nth-child(6) { top: 80%; left: 25%; }
+    </style>
+</head>
+<body>
+    <div class="social-card">
+        <!-- Background effects -->
+        <div class="bg-glow"></div>
+
+        <!-- Decorative corners -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- Particles -->
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 28C8 28 14 24 20 24C26 24 28 20 28 20L40 12" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M28 20C28 20 32 24 32 28C32 32 28 36 24 36C20 36 16 32 16 28" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="36" cy="16" r="3" fill="url(#logoGradient)" opacity="0.8"/>
+                        <path d="M20 28L12 32" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="24" cy="26" r="2" fill="#d4a853"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="8" y1="12" x2="40" y2="36" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3182ce"/>
+                                <stop offset="1" stop-color="#d4a853"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">BirdBox</div>
+            </div>
+
+            <h1 class="tagline">The Future of Nicotine Retail</h1>
+            <p class="description">Passive Revenue. Zero Hassle. Full Compliance.</p>
+            <div class="badge">Launching KC 2026</div>
+        </div>
+    </div>
+
+    <script>
+        // Instructions for generating the image:
+        // 1. Open this file in a browser
+        // 2. Take a screenshot at exactly 1200x630px
+        // 3. Save as social-share.png
+        // 4. Upload to your website root
+        // 5. Update the og:image and twitter:image URLs in index.html to point to social-share.png
+        console.log('Social share image template loaded. Screenshot at 1200x630px to create social-share.png');
+    </script>
+</body>
+</html>

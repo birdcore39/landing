@@ -3,9 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BirdBox - The future of nicotine retail. Secure, verified, effortless age-verified vending solutions for bars.">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>BirdBox — Smart Age-Verified Vending for Bars | Passive Revenue, Zero Hassle</title>
+    <meta name="title" content="BirdBox — Smart Age-Verified Vending for Bars | Passive Revenue, Zero Hassle">
+    <meta name="description" content="Transform your bar into a revenue machine. BirdBox installs, stocks, and maintains premium age-verified nicotine vending — you collect monthly revenue. No upfront cost. Full compliance. Launching Kansas City 2026.">
+    <meta name="keywords" content="age-verified vending, bar vending machine, passive income bars, nicotine vending, automated retail, bar revenue, vending solutions Kansas City, compliance vending">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="BirdBox">
     <meta name="theme-color" content="#0a0f1a">
-    <title>BirdBox — The Future of Nicotine Retail</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.birdbox.io/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.birdbox.io/">
+    <meta property="og:site_name" content="BirdBox">
+    <meta property="og:title" content="BirdBox — Smart Age-Verified Vending for Bars">
+    <meta property="og:description" content="Transform your bar into a revenue machine. We install, stock, and maintain premium age-verified vending machines — you collect monthly revenue. No upfront cost. Full compliance guaranteed.">
+    <meta property="og:image" content="https://www.birdbox.io/logo-icon.svg">
+    <meta property="og:image:type" content="image/svg+xml">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="BirdBox - Smart vending solutions for bars">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.birdbox.io/">
+    <meta property="twitter:title" content="BirdBox — Smart Age-Verified Vending for Bars">
+    <meta property="twitter:description" content="Transform your bar into a revenue machine. Premium age-verified vending with zero hassle. We handle everything — you collect monthly revenue.">
+    <meta property="twitter:image" content="https://www.birdbox.io/logo-icon.svg">
+    <meta property="twitter:image:alt" content="BirdBox - Smart vending solutions for bars">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/logo-icon.svg">
+    <link rel="apple-touch-icon" href="/logo-icon.svg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "BirdBox",
+      "url": "https://www.birdbox.io",
+      "logo": "https://www.birdbox.io/logo-icon.svg",
+      "description": "Smart age-verified vending solutions for bars. We install, stock, and maintain premium vending machines so bar owners can collect passive monthly revenue.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kansas City",
+        "addressRegion": "MO",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "ty@birdcore.us",
+        "contactType": "Business Inquiries"
+      },
+      "sameAs": [],
+      "founder": {
+        "@type": "Person",
+        "name": "BirdBox Team"
+      },
+      "foundingDate": "2026",
+      "foundingLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kansas City",
+          "addressRegion": "MO",
+          "addressCountry": "US"
+        }
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "BirdBox Vending Solutions",
+      "description": "Age-verified vending machines for bars with full compliance, automated stocking, and maintenance included.",
+      "brand": {
+        "@type": "Brand",
+        "name": "BirdBox"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/PreOrder",
+        "description": "No upfront cost. Revenue share model."
+      }
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1160,7 +1253,7 @@
             <div class="email-card">
                 <h2>Get in early.</h2>
                 <p>We're selecting launch partners now. Drop your email for priority access.</p>
-                <form class="email-form" id="emailForm" action="https://formspree.io/f/placeholder" method="POST">
+                <form class="email-form" id="emailForm">
                     <input
                         type="email"
                         name="email"
@@ -1375,38 +1468,67 @@
         // ============================================
         const emailForm = document.getElementById('emailForm');
         const formSuccess = document.getElementById('formSuccess');
+        const emailInput = emailForm.querySelector('input[type="email"]');
+        const submitButton = emailForm.querySelector('button[type="submit"]');
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-S59C3xfxZHCKT105Je3b3WGNJMeItCQwTmkXYT2rvT6fgVpnay05Yt3F-2wa07Pg5g/exec';
+
+        // Email validation function
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
 
         emailForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const formData = new FormData(emailForm);
-            const email = formData.get('email');
+            const email = emailInput.value.trim();
 
-            // For demo purposes, show success immediately
-            // In production, uncomment the fetch call below
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+                emailInput.style.borderColor = '#ef4444';
+                emailInput.focus();
+                setTimeout(() => {
+                    emailInput.style.borderColor = '';
+                }, 2000);
+                return;
+            }
 
-            /*
+            // Show loading state
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span>Submitting...</span>';
+            submitButton.style.opacity = '0.7';
+            submitButton.style.cursor = 'not-allowed';
+
             try {
-                const response = await fetch(emailForm.action, {
+                // Submit to Google Sheets
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
                 });
 
-                if (response.ok) {
-                    emailForm.classList.add('hidden');
-                    formSuccess.classList.add('show');
-                }
+                // Show success state
+                // Note: no-cors mode doesn't return readable responses,
+                // so we assume success if no network error occurred
+                emailForm.classList.add('hidden');
+                formSuccess.classList.add('show');
+
             } catch (error) {
                 console.error('Form submission error:', error);
-            }
-            */
 
-            // Demo success state
-            emailForm.classList.add('hidden');
-            formSuccess.classList.add('show');
+                // Reset button state on error
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+                submitButton.style.opacity = '';
+                submitButton.style.cursor = '';
+
+                // Show error feedback
+                emailInput.style.borderColor = '#ef4444';
+                alert('There was an error submitting your email. Please try again.');
+            }
         });
 
         // ============================================

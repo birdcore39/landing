@@ -1,0 +1,6 @@
+# BirdBox Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.birdbox.io/sitemap.xml
