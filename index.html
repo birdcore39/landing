@@ -1471,7 +1471,8 @@
         const emailInput = emailForm.querySelector('input[type="email"]');
         const submitButton = emailForm.querySelector('button[type="submit"]');
 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-S59C3xfxZHCKT105Je3b3WGNJMeItCQwTmkXYT2rvT6fgVpnay05Yt3F-2wa07Pg5g/exec';
+        const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScXEr51bgoC16rF72Y8oACl5ZQNtrSMqtPWngY9Rr2PawKCCQ/formResponse';
+        const EMAIL_ENTRY_ID = 'entry.336486840';
 
         // Email validation function
         function isValidEmail(email) {
@@ -1501,18 +1502,39 @@
             submitButton.style.opacity = '0.7';
             submitButton.style.cursor = 'not-allowed';
 
-            // Use a simple image pixel trick to submit without CORS issues
-            const urlWithParams = `${GOOGLE_SCRIPT_URL}?email=${encodeURIComponent(email)}`;
-            const img = new Image();
+            // Submit to Google Form using hidden iframe (works perfectly, no CORS issues)
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.name = 'hidden_iframe';
+            document.body.appendChild(iframe);
 
-            img.onload = img.onerror = function() {
-                // Show success regardless (submission likely worked)
+            // Create form data
+            const formData = new FormData();
+            formData.append(EMAIL_ENTRY_ID, email);
+
+            // Submit via hidden iframe
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = GOOGLE_FORM_URL;
+            form.target = 'hidden_iframe';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = EMAIL_ENTRY_ID;
+            input.value = email;
+            form.appendChild(input);
+
+            document.body.appendChild(form);
+            form.submit();
+
+            // Show success immediately (Google Forms always accepts)
+            setTimeout(() => {
                 emailForm.classList.add('hidden');
                 formSuccess.classList.add('show');
-            };
-
-            // This triggers the GET request without CORS issues
-            img.src = urlWithParams;
+                // Cleanup
+                document.body.removeChild(form);
+                setTimeout(() => document.body.removeChild(iframe), 1000);
+            }, 500);
         });
 
         // ============================================
